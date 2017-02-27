@@ -1,11 +1,12 @@
 library(prophet)
-library(tidyverse)
-library(lubridate)
 library(data.table)
 
-# Read data using Data.Table
-EMScalls2 <- fread('EMScalls2.csv')
-View(EMScalls2)
-# Detach data.table to avoid conflicts
-detach("package:data.table", unload=TRUE)
+# Read data using Data.Table::fread, then detach data.table
+EMScalls <- fread('EMScalls.csv')
+#detach("package:data.table", unload=TRUE)
 
+# The script below follows the Prophet quick-start guide
+
+m <- prophet(EMScalls)
+
+future <- make_future_dataframe(m, periods = 365)
