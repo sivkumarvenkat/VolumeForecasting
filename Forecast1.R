@@ -7,10 +7,6 @@ EMScalls <- fread('EMScalls.csv')
 library(dplyr)
 detach("package:data.table", unload=TRUE)
 
-# The script below follows the Prophet quick-start guide
-
-EMScalls <- mutate(EMScalls, y = log(y))
-
-m <- prophet(EMScalls)
-
-future <- make_future_dataframe(m, periods = 760)
+callsFiltered <- EMScalls %>%
+                    group_by(ds) %>%
+                    arrange(desc(ds))
