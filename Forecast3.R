@@ -30,3 +30,14 @@ forecast <- predict(m,future)
 plot(m, forecast)
 
 prophet_plot_components(m, forecast)
+
+plot1 <- ggplot(forecast, aes(ds, trend)) + 
+  geom_line() + 
+  geom_line(aes(ds, yhat), color = 'darkblue', alpha = 0.8)
+
+plot1
+
+library(plotly)
+
+plot2 <- ggplotly(plot1)
+plot2
